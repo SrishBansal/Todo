@@ -16,12 +16,10 @@ export class TodoService {
       status : 'ACTIVE'
     }
     console.log(data)
-
     return await this.databaseService.todo.create({data});
-    }catch(err)
-    {
+  }catch(err){
       return err
-    }
+  }
     
   }
 
