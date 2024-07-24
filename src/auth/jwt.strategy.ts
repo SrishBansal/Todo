@@ -6,7 +6,7 @@ import { DatabaseService } from "src/database/database.service";
 export class JwtStrategy extends PassportStrategy(Strategy)
 {
     constructor(
-        readonly.private.databaseService: DatabaseService
+       private readonly.private.databaseService: DatabaseService
     ){
         super{
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
