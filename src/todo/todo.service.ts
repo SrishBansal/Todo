@@ -6,9 +6,6 @@ import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class TodoService {
-  update(arg0: number, updateTodoDto: UpdateTodoDto) {
-    throw new Error('Method not implemented.');
-  }
   constructor(private readonly databaseService: DatabaseService){}
   async create(createTodoDto: CreateTodoDto) {
     try {
@@ -19,7 +16,7 @@ export class TodoService {
       status : 'ACTIVE'
     }
     console.log(data)
-    return await this.databaseService.todo.create({data});
+    return  this.databaseService.todo.create({data});
   }catch(err){
       return err
   }
@@ -27,23 +24,27 @@ export class TodoService {
   }
 
   async findAll() {
-    return await this.databaseService.todo.findMany();
+    return  this.databaseService.todo.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
+  async findOne(id: number) {
+    return this.databaseService.todo.findFirst({
+      where :{
+        id : id
+      }
+    });
   }
 
   async update(id: number, updateTodoDto: UpdateTodoDto) {
     return this.databaseService.todo.update({
       where:{
-        id:id
+        id : id
       },
-      data: updateTodoDto
+      data : updateTodoDto
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.databaseService.todo.delete({
       where :{
         id :id
