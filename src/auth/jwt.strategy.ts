@@ -14,7 +14,12 @@ export class JwtStrategy extends PassportStrategy(Strategy)
             secretOrKey: "Secret"
         }
     }
-    //async validate(payload : {username:string}){
-      //  cons
-    //}
+    async validate(payload : {userEmail:string}){
+        cons user = await this.databaseService.user.findUnique{
+            where :{
+                email:payload.userEmail,
+            },
+        }
+        return user 
+    }
 }
