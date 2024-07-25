@@ -14,7 +14,7 @@ export class TodoService {
       if (!user) {
         throw new Error('User not found');
       }
-      const data: Prisma.TodoCreateInput = {
+      let data: Prisma.TodoCreateInput = {
         description: createTodoDto.description,
         task: createTodoDto.task,
         status: 'ACTIVE',
@@ -24,7 +24,7 @@ export class TodoService {
       };
       return this.databaseService.todo.create({ data });
     } catch (err) {
-      throw err; // re-throw the error instead of returning it
+      return err; 
     }
   }
 
