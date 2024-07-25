@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { DatabaseService } from 'src/database/database.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, TodoStatus } from '@prisma/client';
 
 @Injectable()
 export class TodoService {
@@ -40,7 +40,11 @@ export class TodoService {
       where: {
         id: id,
       },
-      data: updateTodoDto,
+      data :{
+        ...updateTodoDto,
+        status: 'completed' as TodoStatus,
+      }
+      
     });
   }
   
