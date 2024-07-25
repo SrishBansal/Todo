@@ -4,12 +4,15 @@ import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { JwtAuthGuard } from 'src/auth/auth.gard'; 
 import { UserEmail } from 'src/common/decorator/user-email.decorator';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Todo')
 @Controller('todo')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @UseGuards(JwtAuthGuard) 
+  @ApiOperation({description: "To add a new Todo.", summary:"Start new todo."})
   @Post()
   async create(@Body() createTodoDto: CreateTodoDto, @UserEmail()
   userEmail: string) {
@@ -18,7 +21,7 @@ export class TodoController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get()
+  @ApiOperation({description: "To get all user task.", summary:"Get user task"})
   async findAll(@UserEmail()
 userEmail: string) {
     console.log(userEmail)
@@ -26,6 +29,7 @@ userEmail: string) {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiOperation({description: "To get specific user task.", summary:"Get specific task"})
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<{ id: number; task: string; description: string | null; status: import(".prisma/client").$Enums.TodoStatus; createdAt: Date; updatedAt: Date; }> {
     return this.todoService.findOne(+id);
@@ -33,12 +37,14 @@ userEmail: string) {
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
+  @ApiOperation({description: "To update specific user task.", summary:"update user task"})
   async update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
     return this.todoService.update(+id, updateTodoDto);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
+  @ApiOperation({description: "To delete  user task.", summary:"Delete user task"})
   async remove(@Param('id') id: string) {
     return this.todoService.remove(+id);
   }
