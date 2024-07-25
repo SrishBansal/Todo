@@ -11,33 +11,35 @@ export class TodoController {
 
   @UseGuards(JwtAuthGuard) 
   @Post()
-  create(@Body() createTodoDto: CreateTodoDto) {
-    return this.todoService.create(createTodoDto);
+  async create(@Body() createTodoDto: CreateTodoDto, @UserEmail()
+  userEmail: string) {
+    console.log("output")
+    return await this.todoService.create(createTodoDto, userEmail);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(@UserEmail()
-UserEmail: string) {
-    console.log(UserEmail)
-    return this.todoService.findAll(UserEmail);
+  async findAll(@UserEmail()
+userEmail: string) {
+    console.log(userEmail)
+    return this.todoService.findAll(userEmail);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<{ id: number; task: string; description: string | null; status: import(".prisma/client").$Enums.TodoStatus; createdAt: Date; updatedAt: Date; }> {
+  async findOne(@Param('id') id: string): Promise<{ id: number; task: string; description: string | null; status: import(".prisma/client").$Enums.TodoStatus; createdAt: Date; updatedAt: Date; }> {
     return this.todoService.findOne(+id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
+  async update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
     return this.todoService.update(+id, updateTodoDto);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.todoService.remove(+id);
   }
 }
