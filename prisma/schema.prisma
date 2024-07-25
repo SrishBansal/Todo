@@ -27,6 +27,7 @@ model Todo {
   @@index([userEmail])
 }
 
+
 model User {
   id  Int     @default(autoincrement()) @id
   email String   @unique
