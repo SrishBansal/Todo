@@ -9,6 +9,7 @@ async function bootstrap() {
   .setTitle('Todo REST API')
   .setDescription("A rest api to list user's todos/tasks, authorization implemented using JWT token. The API is made using NestJs.")
   .setVersion('1.0')
+  .addBearerAuth()
   .addTag('todos')
   .build();
   const document = SwaggerModule.createDocument(app, config);
