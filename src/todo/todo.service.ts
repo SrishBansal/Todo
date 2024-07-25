@@ -23,8 +23,12 @@ export class TodoService {
     
   }
 
-  async findAll() {
-    return  this.databaseService.todo.findMany();
+  async findAll(userEmail: string) {
+    return  this.databaseService.todo.findMany({
+      where :{
+        userEmail : userEmail
+      },
+    });
   }
 
   async findOne(id: number) {

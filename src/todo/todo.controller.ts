@@ -3,6 +3,7 @@ import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { JwtAuthGuard } from 'src/auth/auth.gard'; 
+import { UserEmail } from 'src/common/decorator/user-email.decorator';
 
 @Controller('todo')
 export class TodoController {
@@ -16,8 +17,10 @@ export class TodoController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.todoService.findAll();
+  findAll(@UserEmail()
+UserEmail: string) {
+    console.log(UserEmail)
+    return this.todoService.findAll(UserEmail);
   }
 
   @UseGuards(JwtAuthGuard)
