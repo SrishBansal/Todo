@@ -13,10 +13,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         });
     }
 
-    async validate(payload: { userEmail: string }) {
+    async validate(payload: { email: string }) {
         const user = await this.databaseService.user.findUnique({
             where: {
-                email: payload.userEmail,
+                email: payload.email,
             },
         });
         return user;
