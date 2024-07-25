@@ -1,14 +1,20 @@
 import { BadGatewayException, Injectable, NotFoundException } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 import { DatabaseService } from 'src/database/database.service';
 import { register } from 'module';
 import * as bcrypt from 'bcrypt';
 import {LoginDto} from './dto/login.dto'
 import { JwtService } from '@nestjs/jwt';
+import { async } from 'rxjs';
 
 @Injectable()
 export class AuthService {
+  login(loginData: LoginDto) {
+    throw new Error('Method not implemented.');
+  }
+  register(registerData: RegisterUserDto) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private readonly dataservice: DatabaseService,
     private readonly jwtservice: JwtService
@@ -48,3 +54,7 @@ export class AuthService {
     return res;
   }
 }
+function login(loginData: any, LoginDto: typeof LoginDto) {
+  throw new Error('Function not implemented.');
+}
+
