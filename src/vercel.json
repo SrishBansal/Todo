@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "platforms": ["@vercel/node"],
     "builds": [
         {
             "src": "src/main.ts",
