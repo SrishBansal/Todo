@@ -37,12 +37,13 @@ export class TodoService {
 
   async update(id: number, updateTodoDto: UpdateTodoDto) {
     return this.databaseService.todo.update({
-      where:{
-        id : id
+      where: {
+        id: id,
       },
-      data : updateTodoDto
+      data: updateTodoDto,
     });
   }
+  
 
   async remove(id: number) {
     return this.databaseService.todo.delete({
