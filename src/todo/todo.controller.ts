@@ -1,44 +1,41 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { JwtAuthGuard } from 'src/auth/auth.gard';
+import { JwtAuthGuard } from 'src\auth\auth.gard.ts'; // Correct import path
 
 @Controller('todo')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
-  @UserGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard) // UseGuards instead of UserGuards
   @Post()
   create(@Body() createTodoDto: CreateTodoDto) {
     return this.todoService.create(createTodoDto);
   }
 
-  @UserGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.todoService.findAll();
   }
 
-  @UserGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<{ id: number; task: string; description: string | null; status: import(".prisma/client").$Enums.TodoStatus; createdAt: Date; updatedAt: Date; }> {
     return this.todoService.findOne(+id);
   }
 
-  @UserGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
     return this.todoService.update(+id, updateTodoDto);
   }
 
-  @UserGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.todoService.remove(+id);
   }
-}
-function UserGuards(JwtAuthGuard: typeof JwtAuthGuard): (target: TodoController, propertyKey: "findOne", descriptor: TypedPropertyDescriptor<(id: string) => Promise<{ id: number; task: string; description: string | null; status: import(".prisma/client").$Enums.TodoStatus; createdAt: Date; updatedAt: Date; }>>) => void | TypedPropertyDescriptor<...> {
-  throw new Error('Function not implemented.');
 }
 
