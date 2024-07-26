@@ -1,16 +1,15 @@
 {
     "version": 2,
-    "platforms": ["@vercel/node"],
     "builds": [
         {
             "src": "src/main.ts",
             "use": "@vercel/node",
-            "config" : {
-                "includefiles" : [
-                    "prisma/schema.prisma",
-                    "node_modules/.prisma/client/**"
-                ]
-            }
+            "config": {
+        "includeFiles": [
+          "prisma/schema.prisma",
+          "node_modules/.prisma/client/**"
+        ]
+      }
         }
     ],
     "routes": [
