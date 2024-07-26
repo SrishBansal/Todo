@@ -5,16 +5,27 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
+
   const config = new DocumentBuilder()
-  .setTitle('Todo REST API')
-  .setDescription("A rest api to list user's todos/tasks, authorization implemented using JWT token. The API is made using NestJs.")
-  .setVersion('1.0')
-  .addBearerAuth()
-  .addTag('todos')
-  .build();
+   .setTitle('Todo REST API')
+   .setDescription("A rest api to list user's todos/tasks, authorization implemented using JWT token. The API is made using NestJs.")
+   .setVersion('1.0')
+   .addBearerAuth()
+   .addTag('todos')
+   .build();
+
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-  app.useGlobalPipes(new ValidationPipe())
+  SwaggerModule.setup('/swagger', app, document, {
+    customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.css',
+    customJs: [
+      'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js',
+    ],
+  });
+
   await app.listen(3000);
 }
+
 bootstrap();
