@@ -5,7 +5,12 @@
         {
             "src": "src/main.ts",
             "use": "@vercel/node",
-            "output" : "/"
+            "config" : {
+                "includefiles" : [
+                    "prisma/schema.prisma",
+                    "node_modules/.prisma/client/**"
+                ]
+            }
         }
     ],
     "routes": [
