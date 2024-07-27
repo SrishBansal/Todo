@@ -12,7 +12,7 @@ export declare class TodoController {
         status: import(".prisma/client").$Enums.TodoStatus;
         createdAt: Date;
         updatedAt: Date;
-        userEmail: string;
+        userEmail: string | null;
     }[]>;
     findOne(id: string): Promise<{
         id: number;
@@ -29,7 +29,7 @@ export declare class TodoController {
         status: import(".prisma/client").$Enums.TodoStatus;
         createdAt: Date;
         updatedAt: Date;
-        userEmail: string;
+        userEmail: string | null;
     }>;
     remove(id: string): Promise<{
         id: number;
@@ -38,6 +38,6 @@ export declare class TodoController {
         status: import(".prisma/client").$Enums.TodoStatus;
         createdAt: Date;
         updatedAt: Date;
-        userEmail: string;
+        userEmail: string | null;
     }>;
 }
