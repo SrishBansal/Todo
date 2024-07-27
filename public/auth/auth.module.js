@@ -19,8 +19,7 @@ let AuthModule = class AuthModule {
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            database_module_1.DatabaseModule,
+        imports: [database_module_1.DatabaseModule,
             passport_1.PassportModule,
             jwt_1.JwtModule.register({
                 secret: 'Secret',
