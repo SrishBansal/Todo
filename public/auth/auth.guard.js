@@ -15,4 +15,4 @@ class JwtAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
     }
 }
 exports.JwtAuthGuard = JwtAuthGuard;
-//# sourceMappingURL=auth.gard.js.map
+//# sourceMappingURL=auth.guard.js.map

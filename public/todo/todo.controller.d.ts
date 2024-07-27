@@ -21,6 +21,7 @@ export declare class TodoController {
         status: import(".prisma/client").$Enums.TodoStatus;
         createdAt: Date;
         updatedAt: Date;
+        userEmail: string | null;
     }>;
     update(id: string, updateTodoDto: UpdateTodoDto): Promise<{
         id: number;

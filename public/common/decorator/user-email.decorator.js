@@ -4,6 +4,8 @@ exports.UserEmail = void 0;
 const common_1 = require("@nestjs/common");
 exports.UserEmail = (0, common_1.createParamDecorator)((data, ctx) => {
     const request = ctx.switchToHttp().getRequest();
-    return request.user?.Emmail;
+    console.log("request");
+    console.log(request.user);
+    return request.user.email;
 });
 //# sourceMappingURL=user-email.decorator.js.map
